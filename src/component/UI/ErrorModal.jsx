@@ -15,18 +15,18 @@ const ErrorModal = (props) => {
               onClick={() => props.setIsShowError(false)}
             ></div>
             <div className="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
-              <div className="bg-indigo-500 text-white px-4 py-2 flex justify-between">
-                <h2 className="text-lg font-semibold">Modal Title</h2>
+              <div className="bg-red-500 text-white px-4 py-2 flex justify-between">
+                <h2 className="text-lg font-semibold">Error Message</h2>
               </div>
               <div className="p-4 text-black">
                 <p>{props.message}</p>
               </div>
               <div className="border-t px-4 py-2 flex justify-end">
                 <button
-                  className="px-3 py-1 bg-indigo-500 text-white  rounded-md w-full sm:w-auto"
+                  className="px-3 py-1 bg-red-500 text-white  rounded-md w-full sm:w-auto"
                   onClick={() => props.setIsShowError(false)}
                 >
-                  Kapat{" "}
+                  Close{" "}
                 </button>
               </div>
             </div>

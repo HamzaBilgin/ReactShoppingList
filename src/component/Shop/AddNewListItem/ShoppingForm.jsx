@@ -70,7 +70,7 @@ const ShoppingForm = (props) => {
       <ErrorModal
         isShowError={isShowError}
         setIsShowError={setIsShowError}
-        message="Tüm alanlar dolu ve boş karakter içermemelidir."
+        message="All fields must be filled and contain no blank space"
       />
     </form>
   );
