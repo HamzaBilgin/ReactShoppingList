@@ -8,7 +8,7 @@ const ShoppingList = (props) => {
     <>
       {" "}
       {listItems.length === 0 ? (
-        <p className="bg-red-300 text-center text-2xl">Hiç İtem Yok</p>
+        <p className="bg-red-300 text-center text-2xl">No Item In List</p>
       ) : (
         <table className="shoppingList  mt-[40px]">
           <thead>
@@ -44,13 +44,6 @@ const ShoppingList = (props) => {
 export default ShoppingList;
 
 ShoppingList.propTypes = {
-  listItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      checkStatus: PropTypes.boolean,
-      ingredent: PropTypes.string,
-      amount: PropTypes.string,
-    })
-  ),
+  listItems: PropTypes.array,
   setListItems: PropTypes.func,
 };

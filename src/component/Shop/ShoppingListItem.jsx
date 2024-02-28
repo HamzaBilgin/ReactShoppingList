@@ -19,10 +19,10 @@ const ShoppingListItem = ({ item, listItems, setListItems }) => {
       <td>{amount}</td>
       <td className="flex item-center h-[40px]">
         <button className="m-1 px-2 bg-amber-200" onClick={handleDeleteItem}>
-          Güncelle
+          Update
         </button>
         <button className="m-1 px-2 bg-red-600" onClick={handleDeleteItem}>
-          Sil
+          Delete
         </button>
       </td>
     </tr>
@@ -33,13 +33,6 @@ export default ShoppingListItem;
 
 ShoppingListItem.propTypes = {
   item: PropTypes.object,
-  listItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      checkStatus: PropTypes.boolean,
-      ingredent: PropTypes.string,
-      amount: PropTypes.string,
-    })
-  ),
+  listItems: PropTypes.array,
   setListItems: PropTypes.func,
 };

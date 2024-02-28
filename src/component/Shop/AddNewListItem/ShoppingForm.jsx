@@ -63,7 +63,7 @@ const ShoppingForm = (props) => {
           type="submit"
           className="group-hover:bg-emerald-400 px-6 py-2 rounded-lg mb-4"
         >
-          Kaydet
+          Save
         </button>
       </div>
       <ErrorModal
@@ -78,13 +78,6 @@ const ShoppingForm = (props) => {
 export default ShoppingForm;
 
 ShoppingForm.propTypes = {
-  listItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      checkStatus: PropTypes.boolean,
-      ingredent: PropTypes.string,
-      amount: PropTypes.string,
-    })
-  ),
+  listItems: PropTypes.array,
   setListItems: PropTypes.func,
 };

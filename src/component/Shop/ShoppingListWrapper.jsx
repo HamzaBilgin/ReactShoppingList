@@ -2,13 +2,6 @@ import { useState } from "react";
 import ShoppingForm from "./AddNewListItem/ShoppingForm";
 import ShoppingList from "./ShoppingList";
 
-const initialState = {
-  _id: null,
-  updateRequestStatus: null,
-  checkStatus: null,
-  ingredent: "",
-  amount: "",
-};
 const ShoppingListWrapper = () => {
   const [listItems, setListItems] = useState([]);
   return (
