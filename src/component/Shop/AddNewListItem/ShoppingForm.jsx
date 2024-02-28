@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import ShoppingFormItem from "./ShoppingFormItem";
+import { v4 as uuidv4 } from "uuid";
 import { shoppingFormData } from "../../../data/ShoppingData/shoppingFromDatas.js";
+import ShoppingFormItem from "./ShoppingFormItem";
 import ErrorModal from "../../UI/ErrorModal";
 const initialState = {
   _id: null,
@@ -35,7 +36,7 @@ const ShoppingForm = (props) => {
     }
 
     const newListItemInput = {
-      _id: listItems.length + 1,
+      _id: uuidv4(),
       checkStatus: false,
       ingredent: listItem.ingredent,
       amount: listItem.amount,
