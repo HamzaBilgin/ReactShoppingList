@@ -10,7 +10,7 @@ const ShoppingFormItem = ({ data, onChange, value }) => {
       <input
         type={type}
         placeholder={placeholder}
-        className="bg-transparent w-3/4 pl-3 hover:bg-sky-700 group-hover:bg-slate-300 focus:bg-red-300"
+        className="bg-transparent w-3/4 pl-3 hover:bg-sky-700 group-hover:bg-slate-300 "
         name={name}
         onChange={onChange}
         value={value}
