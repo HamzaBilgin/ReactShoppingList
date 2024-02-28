@@ -1,30 +1,63 @@
-import React from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import ShoppingFormItem from "./ShoppingFormItem";
+import { shoppingFormData } from "../../../data/ShoppingData/shoppingFromDatas.js";
+import ErrorModal from "../../UI/ErrorModal";
+const initialState = {
+  _id: null,
+  checkStatus: false,
+  ingredent: "",
+  amount: "",
+};
+const ShoppingForm = (props) => {
+  const { listItems, setListItems } = props;
+  const [listItem, setListItem] = useState(initialState);
+  const [isShowError, setIsShowError] = useState(false);
 
-const ShoppingForm = () => {
+  function handleChange({ target: { name, value } }) {
+    setListItem({
+      ...listItem,
+      [name]: value,
+    });
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const isFormValid = Object.values([
+      listItem.ingredent,
+      listItem.amount,
+    ]).every((value) => value.trim() !== "");
+
+    if (!isFormValid) {
+      console.error("Tüm alanlar dolu ve boş karakter içermemelidir.");
+      setIsShowError(true);
+      return;
+    }
+
+    const newListItemInput = {
+      _id: listItems.length + 1,
+      checkStatus: false,
+      ingredent: listItem.ingredent,
+      amount: listItem.amount,
+    };
+
+    setListItems([...listItems, newListItemInput]);
+    setListItem(initialState);
+  }
   return (
-    <form className="shoppignForm-item-wrapper flex flex-col  px-4 pt-4  w-[400px] mb-10 rounded-lg m-auto cursor-pointer group ">
-      <div className="flex  justify-end p-2 mb-4 item-center w-full mx-auto rounded-lg ">
-        <label className="block w-1/4 text-sm font-medium leading-6 text-gray-900 text-end pr-4">
-          Ingredent :
-        </label>
-        <input
-          type="text"
-          placeholder="Please enter ingredent"
-          className="bg-transparent w-3/4 pl-3 hover:bg-sky-700 group-hover:bg-slate-300 focus:bg-red-300"
-          name="ingredentName"
+    <form
+      className="shoppignForm-item-wrapper flex flex-col  px-4 pt-4  w-[400px] mb-10 rounded-lg m-auto cursor-pointer group "
+      onSubmit={handleSubmit}
+    >
+      {shoppingFormData.map((data) => (
+        <ShoppingFormItem
+          data={data}
+          key={data.name}
+          onChange={handleChange}
+          value={listItem[data.name]}
         />
-      </div>
-      <div className="flex  justify-end p-2 mb-4 item-center w-full mx-auto rounded-lg ">
-        <label className="block w-1/4 text-sm font-medium leading-6 text-gray-900 text-end pr-4">
-          Ingredent :
-        </label>
-        <input
-          type="text"
-          placeholder="Please enter ingredent"
-          className="bg-transparent w-3/4 pl-3 hover:bg-sky-700 group-hover:bg-slate-300"
-          name="ingredentName"
-        />
-      </div>
+      ))}
+
       <div className="flex justify-end">
         <button
           type="submit"
@@ -33,8 +66,25 @@ const ShoppingForm = () => {
           Kaydet
         </button>
       </div>
+      <ErrorModal
+        isShowError={isShowError}
+        setIsShowError={setIsShowError}
+        message="Tüm alanlar dolu ve boş karakter içermemelidir."
+      />
     </form>
   );
 };
 
 export default ShoppingForm;
+
+ShoppingForm.propTypes = {
+  listItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.number,
+      checkStatus: PropTypes.boolean,
+      ingredent: PropTypes.string,
+      amount: PropTypes.string,
+    })
+  ),
+  setListItems: PropTypes.func,
+};
