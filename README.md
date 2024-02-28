@@ -4,8 +4,13 @@ Follow these steps to run it : 1 - npm install == To download the necessary docu
 ![alt text](image-1.png)
 
 and if you want to delete item from list, only click delete
-
 ![alt text](image-2.png)
+
+If there is a product you want to change in the shopping list, please click on the upgrade button and change the content.
+![alt text](image-4.png)
+
+Then click on the save button.
+![alt text](image-5.png)
 
 # React + Vite
 

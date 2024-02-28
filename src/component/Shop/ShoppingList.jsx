@@ -3,7 +3,6 @@ import ShoppingListItem from "./ShoppingListItem";
 
 const ShoppingList = (props) => {
   const { listItems, setListItems } = props;
-
   return (
     <>
       {" "}
