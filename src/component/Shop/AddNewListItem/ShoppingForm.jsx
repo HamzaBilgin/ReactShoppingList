@@ -4,14 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 import { shoppingFormData } from "../../../data/ShoppingData/shoppingFromDatas.js";
 import ShoppingFormItem from "./ShoppingFormItem";
 import ErrorModal from "../../UI/ErrorModal";
+import { useDispatch, useSelector } from "react-redux";
+import { addToList } from "../../../redux/actions/shoppingListActions.js";
 const initialState = {
   _id: null,
   checkStatus: false,
   ingredent: "",
   amount: "",
 };
-const ShoppingForm = (props) => {
-  const { listItems, setListItems } = props;
+const ShoppingForm = () => {
+  const dispatch = useDispatch();
   const [listItem, setListItem] = useState(initialState);
   const [isShowError, setIsShowError] = useState(false);
 
@@ -42,7 +44,7 @@ const ShoppingForm = (props) => {
       amount: listItem.amount,
     };
 
-    setListItems([...listItems, newListItemInput]);
+    dispatch(addToList(newListItemInput));
     setListItem(initialState);
   }
   return (
@@ -77,8 +79,3 @@ const ShoppingForm = (props) => {
 };
 
 export default ShoppingForm;
-
-ShoppingForm.propTypes = {
-  listItems: PropTypes.array,
-  setListItems: PropTypes.func,
-};

@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import ShoppingListItem from "./ShoppingListItem";
-
-const ShoppingList = (props) => {
-  const { listItems, setListItems } = props;
+import { useSelector } from "react-redux";
+const ShoppingList = () => {
+  const shoppingList = useSelector((state) => state.shoppingList.shoppingList);
   return (
     <>
       {" "}
-      {listItems.length === 0 ? (
+      {shoppingList.length === 0 ? (
         <p className="bg-red-300 text-center text-2xl">No Item In List</p>
       ) : (
         <table className="shoppingList  mt-[40px]">
@@ -25,13 +25,8 @@ const ShoppingList = (props) => {
             </tr>
           </thead>
           <tbody>
-            {listItems.map((item) => (
-              <ShoppingListItem
-                key={item._id}
-                item={item}
-                listItems={listItems}
-                setListItems={setListItems}
-              />
+            {shoppingList.map((item) => (
+              <ShoppingListItem key={item._id} item={item} />
             ))}
           </tbody>
         </table>

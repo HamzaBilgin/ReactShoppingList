@@ -1,11 +1,19 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import ShoopingInput from "./ShoopingInput";
-const ShoppingListItem = ({ item, listItems, setListItems }) => {
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  removeFromList,
+  updateListItem,
+} from "../../redux/actions/shoppingListActions.js";
+const ShoppingListItem = ({ item }) => {
+  const dispatch = useDispatch();
+  const shoppingList = useSelector((state) => state.shoppingList.shoppingList);
   const { _id, checkStatus, ingredent, amount } = item;
   const [updateRequest, setUpdateRequest] = useState(false);
   const [updateRequestItem, setUpdateRequestItem] = useState(
-    ...listItems.filter((selectedItem) => selectedItem._id === _id)
+    ...shoppingList.filter((selectedItem) => selectedItem._id === _id)
   );
   function handleChange({ target: { name, value } }) {
     setUpdateRequestItem({
@@ -16,24 +24,16 @@ const ShoppingListItem = ({ item, listItems, setListItems }) => {
   function handleUpdateRequest() {
     setUpdateRequest(true);
     setUpdateRequestItem(
-      ...listItems.filter((selectedItem) => selectedItem._id === _id)
+      ...shoppingList.filter((selectedItem) => selectedItem._id === _id)
     );
   }
   function handleSaveItem() {
-    setListItems(
-      listItems.map((item) => {
-        if (item._id === _id) {
-          item = updateRequestItem;
-          return item;
-        } else {
-          return item;
-        }
-      })
-    );
+    dispatch(updateListItem({ _id: _id, updatedItem: updateRequestItem }));
+
     setUpdateRequest(false);
   }
   function handleDeleteItem() {
-    setListItems(listItems.filter((selectedItem) => selectedItem._id !== _id));
+    dispatch(removeFromList(_id));
   }
   return (
     <tr className="h-[40px] text-center border-b-2 border-black-500">
